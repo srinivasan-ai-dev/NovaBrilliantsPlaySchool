@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Brilliants Play School</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sun: #FFD600;
+    --sky: #4FC3F7;
+    --grass: #66BB6A;
+    --coral: #FF6B6B;
+    --orange: #FF8C00;
+    --purple: #7C4DFF;
+    --navy: #1A237E;
+    --white: #FFFFFF;
+    --cream: #FFFDE7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    background: linear-gradient(160deg, #E3F2FD 0%, #FFF9C4 60%, #C8E6C9 100%);
+    padding: 0 0 60px;
+    overflow: hidden;
+  }
+
+  /* clouds */
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    opacity: .75;
+    animation: drift linear infinite;
+  }
+  .cloud::before, .cloud::after {
+    content: ''; position: absolute;
+    background: white; border-radius: 50%;
+  }
+  .c1 { width:120px; height:40px; top:60px; left:-140px; animation-duration:22s; }
+  .c1::before { width:60px; height:60px; top:-30px; left:20px; }
+  .c1::after  { width:50px; height:50px; top:-20px; left:55px; }
+  .c2 { width:90px;  height:30px; top:120px; right:-110px; animation-duration:18s; animation-direction:reverse; }
+  .c2::before { width:45px; height:45px; top:-22px; left:15px; }
+  .c2::after  { width:38px; height:38px; top:-16px; left:42px; }
+  .c3 { width:150px; height:45px; top:20px; left:30%; animation-duration:30s; }
+  .c3::before { width:70px; height:70px; top:-35px; left:25px; }
+  .c3::after  { width:60px; height:60px; top:-25px; left:70px; }
+  @keyframes drift { from { transform: translateX(0); } to { transform: translateX(110vw); } }
+
+  /* sun */
+  .sun {
+    position: absolute; top: 18px; right: 60px;
+    width: 80px; height: 80px;
+    background: var(--sun);
+    border-radius: 50%;
+    box-shadow: 0 0 0 12px rgba(255,214,0,.25), 0 0 0 24px rgba(255,214,0,.12);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 12px rgba(255,214,0,.25),0 0 0 24px rgba(255,214,0,.12)} 50%{box-shadow:0 0 0 18px rgba(255,214,0,.3),0 0 0 36px rgba(255,214,0,.15)} }
+
+  /* rainbow */
+  .rainbow {
+    position: absolute; left: -30px; top: 40px;
+    width: 220px; height: 110px;
+    border-radius: 110px 110px 0 0;
+    border: 14px solid transparent;
+    border-image: linear-gradient(to bottom, #f00,#f90,#ff0,#0a0,#00f,#90f) 1;
+    opacity: .7;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    position: relative; z-index: 10;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--sky), var(--purple));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 4px 12px rgba(124,77,255,.3);
+  }
+  .logo-text { line-height: 1.1; }
+  .logo-text .brand { font-family: 'Fredoka One'; font-size: 22px; background: linear-gradient(90deg,#7C4DFF,#FF6B6B,#FFD600); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .logo-text .sub { font-size: 11px; letter-spacing: 2px; color: var(--navy); font-weight: 700; text-transform: uppercase; }
+
+  nav ul { list-style: none; display: flex; gap: 28px; }
+  nav ul a { text-decoration: none; font-weight: 700; font-size: 14px; color: var(--navy); transition: color .2s; }
+  nav ul a:hover { color: var(--purple); }
+
+  .btn {
+    display: inline-block; padding: 10px 24px;
+    background: linear-gradient(135deg, var(--coral), var(--orange));
+    color: white; font-family: 'Fredoka One'; font-size: 16px;
+    border-radius: 50px; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(255,107,107,.4);
+    transition: transform .2s, box-shadow .2s;
+    border: none; cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,107,.5); }
+  .btn-outline {
+    background: white; color: var(--purple);
+    box-shadow: 0 4px 16px rgba(124,77,255,.2);
+    border: 2px solid var(--purple);
+  }
+  .btn-outline:hover { background: var(--purple); color: white; }
+
+  .hero-body {
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    padding: 40px 20px 20px; position: relative; z-index: 5;
+  }
+  .hero-badge {
+    background: linear-gradient(135deg, var(--sky), #29B6F6);
+    color: white; font-weight: 800; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 18px; border-radius: 50px;
+    margin-bottom: 18px; display: inline-block;
+    animation: bounceIn .8s ease;
+  }
+  @keyframes bounceIn { 0%{opacity:0;transform:scale(.5)} 70%{transform:scale(1.1)} 100%{opacity:1;transform:scale(1)} }
+
+  .hero h1 {
+    font-family: 'Fredoka One'; font-size: clamp(48px,10vw,96px);
+    line-height: 1;
+    background: linear-gradient(120deg, #FF6B6B 0%, #FFD600 40%, #66BB6A 70%, #4FC3F7 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 0 rgba(0,0,0,.08));
+    animation: slideUp .9s ease .1s both;
+  }
+  .hero h2 {
+    font-family: 'Fredoka One'; font-size: clamp(28px,6vw,52px);
+    color: var(--navy); margin-bottom: 20px;
+    animation: slideUp .9s ease .2s both;
+  }
+  @keyframes slideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero p {
+    max-width: 520px; font-size: 17px; color: #37474F;
+    line-height: 1.7; margin-bottom: 32px;
+    animation: slideUp .9s ease .3s both;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: slideUp .9s ease .4s both; }
+
+  .stars-row { display: flex; gap: 4px; margin-top: 24px; font-size: 22px; animation: slideUp .9s ease .5s both; }
+  .stars-label { font-size: 13px; color: #78909C; margin-top: 4px; }
+
+  /* gift banner */
+  .gift-banner {
+    background: linear-gradient(135deg, var(--sun), var(--orange));
+    color: white; text-align: center; padding: 14px 20px;
+    font-family: 'Fredoka One'; font-size: 20px;
+    letter-spacing: .5px;
+    position: relative; overflow: hidden;
+  }
+  .gift-banner::before, .gift-banner::after {
+    content: '🎁'; position: absolute; font-size: 32px; top: 50%; transform: translateY(-50%);
+  }
+  .gift-banner::before { left: 20px; }
+  .gift-banner::after { right: 20px; }
+
+  /* SECTION SHARED */
+  section { padding: 72px 20px; }
+  .section-label {
+    font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 8px; text-align: center;
+  }
+  .section-title {
+    font-family: 'Fredoka One'; font-size: clamp(30px,5vw,48px);
+    color: var(--navy); text-align: center; margin-bottom: 12px;
+  }
+  .section-sub {
+    text-align: center; max-width: 560px; margin: 0 auto 48px;
+    color: #546E7A; font-size: 16px; line-height: 1.7;
+  }
+
+  /* CLASSES GRID */
+  .classes { background: white; }
+  .classes-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 24px; max-width: 1100px; margin: 0 auto;
+  }
+  .class-card {
+    border-radius: 24px; padding: 32px 26px; position: relative;
+    overflow: hidden; transition: transform .3s, box-shadow .3s;
+    cursor: default;
+  }
+  .class-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,.12); }
+  .class-card .card-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+  .class-card h3 { font-family: 'Fredoka One'; font-size: 24px; margin-bottom: 8px; }
+  .class-card p { font-size: 14px; line-height: 1.6; opacity: .85; }
+  .class-card .tag {
+    display: inline-block; margin-top: 16px; padding: 4px 14px;
+    border-radius: 50px; font-size: 12px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  /* card colors */
+  .card-hw { background: linear-gradient(135deg,#E3F2FD,#BBDEFB); color: #0D47A1; }
+  .card-hw .tag { background: #1565C0; color: white; }
+  .card-ab { background: linear-gradient(135deg,#F3E5F5,#E1BEE7); color: #4A148C; }
+  .card-ab .tag { background: #6A1B9A; color: white; }
+  .card-vm { background: linear-gradient(135deg,#E8F5E9,#C8E6C9); color: #1B5E20; }
+  .card-vm .tag { background: #2E7D32; color: white; }
+  .card-ph { background: linear-gradient(135deg,#FFF3E0,#FFE0B2); color: #E65100; }
+  .card-ph .tag { background: #EF6C00; color: white; }
+  .card-tr { background: linear-gradient(135deg,#FCE4EC,#F8BBD9); color: #880E4F; }
+  .card-tr .tag { background: #AD1457; color: white; }
+  .card-er { background: linear-gradient(135deg,#E0F7FA,#B2EBF2); color: #006064; }
+  .card-er .tag { background: #00838F; color: white; }
+
+  /* WHY US */
+  .whyus { background: linear-gradient(160deg, #E8EAF6 0%, #EDE7F6 100%); }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 20px; max-width: 1000px; margin: 0 auto;
+  }
+  .why-card {
+    background: white; border-radius: 20px; padding: 28px 22px; text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    transition: transform .3s;
+  }
+  .why-card:hover { transform: translateY(-4px); }
+  .why-card .icon { font-size: 40px; margin-bottom: 12px; }
+  .why-card h4 { font-family: 'Fredoka One'; font-size: 20px; color: var(--navy); margin-bottom: 6px; }
+  .why-card p { font-size: 14px; color: #607D8B; line-height: 1.6; }
+
+  /* ADMISSIONS */
+  .admissions {
+    background: linear-gradient(135deg, var(--navy) 0%, #283593 100%);
+    text-align: center; color: white;
+  }
+  .admissions .section-title { color: white; }
+  .admissions .section-sub { color: rgba(255,255,255,.75); }
+  .admit-box {
+    max-width: 680px; margin: 0 auto;
+    background: rgba(255,255,255,.08);
+    border-radius: 28px; padding: 40px 32px;
+    border: 1px solid rgba(255,255,255,.15);
+  }
+  .admit-box .gift-note {
+    background: var(--sun); color: var(--navy);
+    border-radius: 16px; padding: 16px 24px;
+    font-family: 'Fredoka One'; font-size: 20px;
+    margin-bottom: 28px; display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .steps {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 32px;
+  }
+  .step {
+    background: rgba(255,255,255,.1); border-radius: 16px;
+    padding: 16px 20px; min-width: 140px; text-align: center;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  .step-num { font-family: 'Fredoka One'; font-size: 32px; color: var(--sun); }
+  .step-label { font-size: 13px; margin-top: 4px; opacity: .85; }
+  .contact-info {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 28px;
+  }
+  .contact-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.12); border-radius: 50px;
+    padding: 10px 20px; font-size: 14px; font-weight: 700;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0D1B6B; color: rgba(255,255,255,.7);
+    text-align: center; padding: 24px 20px; font-size: 13px;
+  }
+  footer strong { color: white; font-family: 'Fredoka One'; font-size: 16px; }
+
+  /* floating stars */
+  .floaties {
+    position: fixed; pointer-events: none; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+  }
+  .floatie {
+    position: absolute; font-size: 18px;
+    animation: floatStar linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatStar {
+    0%  { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+    10% { opacity: .6; }
+    90% { opacity: .6; }
+    100%{ opacity: 0; transform: translateY(-10vh) rotate(360deg); }
+  }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media(max-width:640px){
+    nav ul { display: none; }
+    .gift-banner { font-size: 15px; }
+    .gift-banner::before,.gift-banner::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- floating stars -->
+<div class="floaties" id="floaties"></div>
+
+<!-- GIFT BANNER -->
+<div class="gift-banner">
+  First 5 Summer Enrollments get a FREE GIFT! &nbsp;🌟&nbsp; Admissions Open Now!
+</div>
+
+<!-- NAV -->
+<header class="hero">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="sun"></div>
+
+  <nav>
+    <div class="logo">
+      <div class="logo-icon">🌟</div>
+      <div class="logo-text">
+        <div class="brand">Nova Brilliants</div>
+        <div class="sub">Play School</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#admissions">Admissions</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#admissions" class="btn">Enroll Now 🎉</a>
+  </nav>
+
+  <div class="hero-body">
+    <div class="hero-badge">☀️ Summer 2025 Classes Open</div>
+    <h1>Summer Classes</h1>
+    <h2>Where Little Minds Shine!</h2>
+    <p>Join Nova Brilliants Play School for an unforgettable summer of learning, creativity, and fun — designed specially for your little superstar.</p>
+    <div class="hero-btns">
+      <a href="#admissions" class="btn">Enroll Today</a>
+      <a href="#classes" class="btn btn-outline">Explore Classes</a>
+    </div>
+    <div class="stars-row">⭐⭐⭐⭐⭐</div>
+    <div class="stars-label">Loved by 500+ happy families</div>
+  </div>
+</header>
+
+<!-- CLASSES -->
+<section class="classes" id="classes">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">Our Summer Classes</h2>
+  <p class="section-sub">Six expert-designed programmes to build confidence, creativity, and core skills in young learners.</p>
+
+  <div class="classes-grid">
+    <div class="class-card card-hw reveal">
+      <span class="card-icon">✏️</span>
+      <h3>Handwriting</h3>
+      <p>Build neat, confident penmanship through structured, fun exercises that make every letter a work of art.</p>
+      <span class="tag">Ages 4–8</span>
+    </div>
+    <div class="class-card card-ab reveal">
+      <span class="card-icon">🧮</span>
+      <h3>Abacus</h3>
+      <p>Unlock lightning-fast mental arithmetic with the ancient art of abacus — supercharge your child's number sense.</p>
+      <span class="tag">Ages 5–10</span>
+    </div>
+    <div class="class-card card-vm reveal">
+      <span class="card-icon">🔢</span>
+      <h3>Vedic Maths</h3>
+      <p>Ancient Indian techniques that make complex calculations feel like magic. Build speed, accuracy and mathematical confidence.</p>
+      <span class="tag">Ages 6–12</span>
+    </div>
+    <div class="class-card card-ph reveal">
+      <span class="card-icon">🔤</span>
+      <h3>Phonics</h3>
+      <p>Master the sounds of language through playful phonics activities that lay the foundation for strong reading and speaking.</p>
+      <span class="tag">Ages 3–6</span>
+    </div>
+    <div class="class-card card-tr reveal">
+      <span class="card-icon">📖</span>
+      <h3>Tamil Reading</h3>
+      <p>Celebrate our mother tongue! Engaging sessions that make Tamil letters and words come alive for young readers.</p>
+      <span class="tag">Ages 4–8</span>
+    </div>
+    <div class="class-card card-er reveal">
+      <span class="card-icon">📚</span>
+      <h3>English Reading</h3>
+      <p>From ABCs to full sentences — interactive storytelling and comprehension activities to build confident English readers.</p>
+      <span class="tag">Ages 4–8</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus" id="why">
+  <div class="section-label">Our Promise</div>
+  <h2 class="section-title">Why Nova Brilliants?</h2>
+  <p class="section-sub">We believe every child is a genius waiting to sparkle. Our approach combines proven methods with joyful learning.</p>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="icon">👩‍🏫</div>
+      <h4>Expert Teachers</h4>
+      <p>Certified educators with years of early-childhood experience dedicated to your child's growth.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="icon">🎮</div>
+      <h4>Play-Based Learning</h4>
+      <p>Every lesson is designed to feel like play — because joyful children learn best.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="icon">📊</div>
+      <h4>Progress Tracking</h4>
+      <p>Regular assessments and parent updates so you always know how your star is growing.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="icon">🏡</div>
+      <h4>Safe Environment</h4>
+      <p>A warm, secure, nurturing space where every child feels seen, valued, and inspired.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="icon">🌈</div>
+      <h4>Holistic Growth</h4>
+      <p>We develop reading, writing, maths, and critical thinking — the complete foundation for school success.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="icon">🤝</div>
+      <h4>Small Batches</h4>
+      <p>Intimate class sizes ensure personalised attention for every child, every single day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section class="admissions" id="admissions">
+  <div class="section-label" style="color:#FFD600;">Enroll Now</div>
+  <h2 class="section-title">Admissions Open!</h2>
+  <p class="section-sub">Secure your child's spot for our Summer Classes today. Limited seats available!</p>
+
+  <div class="admit-box reveal">
+    <div class="gift-note">🎁 First 5 enrollments receive a FREE GIFT!</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-label">Call Us</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-label">Visit School</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-label">Enroll & Pay</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-label">Start Learning!</div>
+      </div>
+    </div>
+    <a href="tel:6369220360" class="btn" style="font-size:18px; padding:14px 36px;">📞 Call 6369220360</a>
+    <div class="contact-info" id="contact">
+      <div class="contact-chip">📞 6369220360</div>
+      <div class="contact-chip">📍 B-Colony, Karthikeyan Nagar, Reddiyarpatti</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Nova Brilliants Play School</strong><br>
+  B-Colony, Karthikeyan Nagar, Reddiyarpatti &nbsp;|&nbsp; 📞 6369220360<br><br>
+  <span>© 2025 Nova Brilliants. Made with ❤️ for little learners.</span>
+</footer>
+
+<script>
+  // floating stars/emojis
+  const items = ['⭐','✨','🌟','💫','🎈','🌈','🎉'];
+  const container = document.getElementById('floaties');
+  for(let i=0;i<18;i++){
+    const el = document.createElement('div');
+    el.className = 'floatie';
+    el.textContent = items[i % items.length];
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.animationDuration = (12 + Math.random()*18) + 's';
+    el.style.animationDelay = (Math.random()*20) + 's';
+    el.style.fontSize = (14 + Math.random()*18) + 'px';
+    container.appendChild(el);
+  }
+
+  // scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
