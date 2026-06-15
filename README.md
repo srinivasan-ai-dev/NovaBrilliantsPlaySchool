@@ -10,6 +10,7 @@ A fully responsive, modern web storefront developed for a local educational inst
 * **Color Psychology:** Utilized a warm, inviting gradient palette (yellows, oranges, soft blues) to evoke playfulness and trust, aligning with early childhood education branding.
 * **Rapid Prototyping:** Leveraged AI-assisted development workflows to accelerate the transition from wireframe to production-ready code, delivering the client's vision in record time.
 
+
 ### 🛠️ Tech Stack
 * **Frontend:** [HTML5 / CSS3]
 * **Deployment:** [GitHub Pages]
