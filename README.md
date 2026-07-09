@@ -2,6 +2,7 @@
 
 **Live Demo:** [https://srinivasan-ai-dev.github.io/NovaBrilliantsPlaySchool/]
 
+
 ### Project Overview
 A fully responsive, modern web storefront developed for a local educational institution. The objective was to digitize the school's enrollment process, highlight summer programs, and create a visually engaging, trustworthy landing page for parents.
 
